@@ -11,12 +11,15 @@
 
   <param name="style" select="'minimal'" />
 
+  <param name="highlight-namespace" select="$ns.empty" />
+
   <include href="formatted.xsl" />
 
   <include href="original.xsl" />
 
   <include href="library.xsl" />
 
+  <variable select="''" name="ns.empty" />
   <variable select="'http://www.w3.org/XML/1998/namespace'" name="ns.xml" />
   <variable select="'http://www.w3.org/2000/xmlns/'" name="ns.xmlns" />
   <variable select="'http://www.w3.org/1999/XSL/Transform'" name="ns.xslt" />
@@ -37,6 +40,9 @@
         <h:style type="text/css">
           <value-of select="document(concat($style, '.css'))/css" />
         </h:style>
+        <h:script type="text/javascript">
+          <value-of select="document('behaviour.js')/js" />
+        </h:script>
       </h:head>
       <h:body>
         <h:pre id="source">

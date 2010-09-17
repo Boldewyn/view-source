@@ -120,4 +120,54 @@
     </choose>
   </template>
 
+  <!-- def detect-lang -->
+  <template name="detect-lang">
+    <param name="node" select="." />
+    <if test="namespace-uri($node) = $highlight-namespace">
+      <text>highlight </text>
+    </if>
+    <choose>
+      <when test="namespace-uri($node) = $ns.empty">
+        <text>empty-ns</text>
+      </when>
+      <when test="namespace-uri($node) = $ns.xml">
+        <text>xml</text>
+      </when>
+      <when test="namespace-uri($node) = $ns.xmlns">
+        <text>xmlns</text>
+      </when>
+      <when test="namespace-uri($node) = $ns.xhtml">
+        <text>xhtml</text>
+      </when>
+      <when test="namespace-uri($node) = $ns.svg">
+        <text>svg</text>
+      </when>
+      <when test="namespace-uri($node) = $ns.xlink">
+        <text>xlink</text>
+      </when>
+      <when test="namespace-uri($node) = $ns.xslt">
+        <text>xslt</text>
+      </when>
+      <when test="namespace-uri($node) = $ns.fo">
+        <text>fo</text>
+      </when>
+      <when test="namespace-uri($node) = $ns.mml">
+        <text>mathml</text>
+      </when>
+      <when test="namespace-uri($node) = $ns.xsd">
+        <text>xsd</text>
+      </when>
+      <when test="namespace-uri($node) = $ns.xsd-inst">
+        <text>xsd-inst</text>
+      </when>
+      <when test="namespace-uri($node) = $ns.smil">
+        <text>smil</text>
+      </when>
+      <when test="namespace-uri($node) = $ns.xforms">
+        <text>xforms</text>
+      </when>
+      <otherwise />
+    </choose>
+  </template>
+
 </stylesheet>

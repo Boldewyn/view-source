@@ -6,10 +6,13 @@
   <!-- Elements (formatted) -->
   <template match="*" mode="formatted">
     <param name="indent" />
+    <variable name="lang">
+      <call-template name="detect-lang" />
+    </variable>
     <value-of select="$indent" />
     <choose>
       <when test="node()">
-        <h:span class="element">
+        <h:span class="{$lang} element">
           <h:span class="tag start">
             <text>&lt;</text>
             <value-of select="name(.)" />
@@ -31,7 +34,7 @@
         </h:span>
       </when>
       <otherwise>
-        <h:span class="element empty">
+        <h:span class="{$lang} element empty">
           <h:span class="tag empty">
             <text>&lt;</text>
             <value-of select="name(.)" />
@@ -48,8 +51,11 @@
 
   <!-- Attributes (formatted) -->
   <template match="@*" mode="formatted">
+    <variable name="lang">
+      <call-template name="detect-lang" />
+    </variable>
     <text> </text>
-    <h:span class="attribute">
+    <h:span class="{$lang} attribute">
       <value-of select="name()" />
       <text>="</text>
       <h:span class="attribute-value">
