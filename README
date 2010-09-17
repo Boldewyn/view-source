@@ -1,0 +1,81 @@
+                                XML Source View
+
+                  Syntax highlighting for XML files with XSLT
+
+
+This stylesheet package contains XSLT styles for syntax highlighting of
+arbitrary XML files.
+
+
+P a r a m e t e r s :
+=====================
+
+* format: controls, whether the output should be pretty-printed or tried to be
+  kept as near as possible to the original source. Default is to apply
+  formatting.
+
+* base-indent: sets the indentation step for each level, if the output should
+  be formatted. The default are two spaces.
+
+* style: The name of a stylesheet (without extension) to be used for display.
+  Note, that the content of the stylesheet, though CSS otherwise, must be
+  encircled by an element <css/> in the empty namespace.
+
+
+H o w   t o   D e p l o y :
+===========================
+
+a) in Firefox: Add the following lines to your XML file:
+
+    <?xslt-param name="format" select="true()" ?>
+    <?xml-stylesheet type="text/xsl" href="view-source.xsl"?>
+
+    (other browsers don't support <?xslt-param ?>, you have to touch
+    view-source.xsl itself there.)
+
+b) via a command line XSLT processor:
+
+    $ saxon -s:source.xml -xsl:view-source.xsl -o:out.xhtml
+
+    $ xalan -IN source.xml -XSL view-source.xsl -OUT out.xhtml
+
+c) inside PHP:
+
+    <?php
+    $xsl = new DOMDocument;
+    $xsl->load('view-source.xsl');
+    $proc = new XSLTProcessor;
+    $proc->importStyleSheet($xsl);
+
+    $xml = new DOMDocument;
+    $xml->load('source.xml');
+    $proc->setParameter('', 'format', TRUE);
+    $proc->transformToURI($xml, 'file:///tmp/out.xhtml');
+    ?>
+
+d) in Python with libxml2 and libxslt bindings:
+
+    #! /usr/bin/env python
+
+    import libxml2, libxslt
+
+    styledoc = libxml2.parseFile("view-source.xsl")
+    style = libxslt.parseStylesheetDoc(styledoc)
+    doc = libxml2.parseFile('source.xml')
+    result = style.applyStylesheet(doc, {"format": True})
+
+    out = open('out.xhtml', 'w')
+    out.write(result.serialize())
+
+    style.freeStylesheet()
+    doc.freeDoc()
+    result.freeDoc()
+    out.close()
+
+
+L i c e n s e :
+===============
+
+The stylesheet is published under an MIT-style license and the GPL v2. Choose
+at your liking.
+
