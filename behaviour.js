@@ -1,10 +1,8 @@
 <js>
-window.onload = function () {
-  var els = []; //document.getElementsByClassNames('element');
-  for (var el in els) {
-    el.onclick = function () {
-      alert(el.getAttribute('class'));
-    };
-  }
-};
+var els = document.getElementsByClassName('element');
+for (var el in els) {
+  els[el].onclick = (function (a) { return function () {
+    //alert(a);
+  }; })(els[el].getAttribute('class'));
+}
 </js>

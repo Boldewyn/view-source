@@ -11,6 +11,8 @@
 
   <param name="style" select="'minimal'" />
 
+  <param name="add-behaviour" select="true()" />
+
   <param name="highlight-namespace" select="$ns.empty" />
 
   <include href="formatted.xsl" />
@@ -19,20 +21,6 @@
 
   <include href="library.xsl" />
 
-  <variable select="''" name="ns.empty" />
-  <variable select="'http://www.w3.org/XML/1998/namespace'" name="ns.xml" />
-  <variable select="'http://www.w3.org/2000/xmlns/'" name="ns.xmlns" />
-  <variable select="'http://www.w3.org/1999/XSL/Transform'" name="ns.xslt" />
-  <variable select="'http://www.w3.org/1999/xhtml'" name="ns.xhtml" />
-  <variable select="'http://www.w3.org/2000/svg'" name="ns.svg" />
-  <variable select="'http://www.w3.org/1998/Math/MathML'" name="ns.mml" />
-  <variable select="'http://www.w3.org/2005/SMIL21/Language'" name="ns.smil" />
-  <variable select="'http://www.w3.org/1999/XSL/Format'" name="ns.fo" />
-  <variable select="'http://www.w3.org/1999/xlink'" name="ns.xlink" />
-  <variable select="'http://www.w3.org/2001/XMLSchema'" name="ns.xsd" />
-  <variable select="'http://www.w3.org/2001/XMLSchema-instance'" name="ns.xsd-inst" />
-  <variable select="'http://www.w3.org/2001/xforms'" name="ns.xforms" />
-
   <template match="/">
     <h:html>
       <h:head>
@@ -40,9 +28,6 @@
         <h:style type="text/css">
           <value-of select="document(concat($style, '.css'))/css" />
         </h:style>
-        <h:script type="text/javascript">
-          <value-of select="document('behaviour.js')/js" />
-        </h:script>
       </h:head>
       <h:body>
         <h:pre id="source">
@@ -55,6 +40,11 @@
             </otherwise>
           </choose>
         </h:pre>
+        <if test="$add-behaviour">
+          <h:script type="text/javascript">
+            <value-of select="document('behaviour.js')/js" />
+          </h:script>
+        </if>
       </h:body>
     </h:html>
   </template>

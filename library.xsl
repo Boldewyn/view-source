@@ -3,6 +3,20 @@
   xmlns="http://www.w3.org/1999/XSL/Transform"
   xmlns:h="http://www.w3.org/1999/xhtml">
 
+  <variable select="''" name="ns.empty" />
+  <variable select="'http://www.w3.org/XML/1998/namespace'" name="ns.xml" />
+  <variable select="'http://www.w3.org/2000/xmlns/'" name="ns.xmlns" />
+  <variable select="'http://www.w3.org/1999/XSL/Transform'" name="ns.xslt" />
+  <variable select="'http://www.w3.org/1999/xhtml'" name="ns.xhtml" />
+  <variable select="'http://www.w3.org/2000/svg'" name="ns.svg" />
+  <variable select="'http://www.w3.org/1998/Math/MathML'" name="ns.mml" />
+  <variable select="'http://www.w3.org/2005/SMIL21/Language'" name="ns.smil" />
+  <variable select="'http://www.w3.org/1999/XSL/Format'" name="ns.fo" />
+  <variable select="'http://www.w3.org/1999/xlink'" name="ns.xlink" />
+  <variable select="'http://www.w3.org/2001/XMLSchema'" name="ns.xsd" />
+  <variable select="'http://www.w3.org/2001/XMLSchema-instance'" name="ns.xsd-inst" />
+  <variable select="'http://www.w3.org/2001/xforms'" name="ns.xforms" />
+
   <!-- def format-text -->
   <template name="format-text">
     <param name="text" select="." />
