@@ -3,17 +3,16 @@
   xmlns:t="http://www.w3.org/1999/XSL/Transform"
   xmlns="http://www.w3.org/1999/xhtml">
 
-  <t:variable select="''" name="ns.empty" />
   <t:variable name="ns" xmlns="">
     <empty></empty>
     <xml>http://www.w3.org/XML/1998/namespace</xml>
     <xmlns>http://www.w3.org/2000/xmlns/</xmlns>
-    <xslt>http://www.w3.org/1999/XSL/Transform</xslt>
     <xhtml>http://www.w3.org/1999/xhtml</xhtml>
     <svg>http://www.w3.org/2000/svg</svg>
     <mathml>http://www.w3.org/1998/Math/MathML</mathml>
-    <smil>http://www.w3.org/2005/SMIL21/Language</smil>
+    <xslt>http://www.w3.org/1999/XSL/Transform</xslt>
     <fo>http://www.w3.org/1999/XSL/Format</fo>
+    <smil>http://www.w3.org/2005/SMIL21/Language</smil>
     <xlink>http://www.w3.org/1999/xlink</xlink>
     <xsd>http://www.w3.org/2001/XMLSchema</xsd>
     <xsd-inst>http://www.w3.org/2001/XMLSchema-instance</xsd-inst>
@@ -115,6 +114,7 @@
   <t:template name="parse-attval">
     <t:param name="att" select="." />
     <t:choose>
+      <!-- FIXME: element{xhtml} / @attr{obscure-ns} 'href' gets linkified -->
       <t:when test="(namespace-uri($att/..) = document('')//t:variable[@name = 'ns']/xml/text()   and ( local-name($att) = 'base' )) or
                     (namespace-uri($att/..) = document('')//t:variable[@name = 'ns']/xhtml/text() and ( local-name($att) = 'src' or local-name($att) = 'href' )) or
                     (namespace-uri($att/..) = document('')//t:variable[@name = 'ns']/svg/text()   and ( local-name($att) = 'src' )) or
@@ -154,7 +154,7 @@
   <t:template name="print-name">
     <t:param name="node" select="." />
     <span class="label">
-      <t:if test="namespace-uri($node) != document('')//t:variable[@name = 'ns']/empty/text()">
+      <t:if test="namespace-uri($node)">
         <t:attribute name="title">
           <t:value-of select="namespace-uri($node)" />
         </t:attribute>

@@ -3,6 +3,8 @@
 body { font: 100.01% monospace; }
 pre { font-family: monospace; }
 .element { color: #070; }
+.xhtml .tag { color: #044; }
+
 .attribute { color: #700; }
 .text { color: #007; }
 .attribute-value { color: #404; }

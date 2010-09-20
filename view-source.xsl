@@ -15,6 +15,10 @@
 
   <t:param name="highlight-namespace" select="''" />
 
+  <t:param name="filename" />
+
+  <t:variable name="version" select="'0.9'" />
+
   <t:include href="formatted.xsl" />
 
   <t:include href="original.xsl" />
@@ -27,10 +31,17 @@
             doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
     />
 
+  <!--
+    master template: Decide between formatted or original rendering
+  -->
   <t:template match="/">
-    <html>
+    <html xml:lang="en">
       <head>
-        <title>XML Source</title>
+        <title>
+          XML Source
+          <t:if test="$filename">of <t:value-of select="$filename" /></t:if>
+        </title>
+        <meta name="generator" content="view-source {$version}; http://boldewyn.github.com/view-source" />
         <style type="text/css">
           <t:value-of select="document(concat($style, '.css'))/css" />
         </style>
