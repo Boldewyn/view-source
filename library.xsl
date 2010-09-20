@@ -9,7 +9,7 @@
   <variable select="'http://www.w3.org/1999/XSL/Transform'" name="ns.xslt" />
   <variable select="'http://www.w3.org/1999/xhtml'" name="ns.xhtml" />
   <variable select="'http://www.w3.org/2000/svg'" name="ns.svg" />
-  <variable select="'http://www.w3.org/1998/Math/MathML'" name="ns.mml" />
+  <variable select="'http://www.w3.org/1998/Math/MathML'" name="ns.mathml" />
   <variable select="'http://www.w3.org/2005/SMIL21/Language'" name="ns.smil" />
   <variable select="'http://www.w3.org/1999/XSL/Format'" name="ns.fo" />
   <variable select="'http://www.w3.org/1999/xlink'" name="ns.xlink" />
@@ -165,7 +165,7 @@
       <when test="namespace-uri($node) = $ns.fo">
         <text>fo</text>
       </when>
-      <when test="namespace-uri($node) = $ns.mml">
+      <when test="namespace-uri($node) = $ns.mathml">
         <text>mathml</text>
       </when>
       <when test="namespace-uri($node) = $ns.xsd">
