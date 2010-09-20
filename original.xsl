@@ -1,92 +1,92 @@
 <?xml version="1.0" ?>
-<stylesheet version="1.0"
-  xmlns="http://www.w3.org/1999/XSL/Transform"
-  xmlns:h="http://www.w3.org/1999/xhtml">
+<t:stylesheet version="1.0"
+  xmlns:t="http://www.w3.org/1999/XSL/Transform"
+  xmlns="http://www.w3.org/1999/xhtml">
 
   <!-- Elements (original) -->
-  <template match="*" mode="original">
-    <variable name="lang">
-      <call-template name="detect-lang" />
-    </variable>
-    <choose>
-      <when test="node()">
-        <h:span class="{$lang} element">
-          <h:span class="tag start">
-            <text>&lt;</text>
-            <value-of select="name(.)" />
-            <for-each select="@*">
-              <apply-templates select="." mode="original" />
-            </for-each>
-            <text>&gt;</text>
-          </h:span>
-          <apply-templates mode="original" />
-          <h:span class="tag end">
-            <text>&lt;/</text>
-            <value-of select="name(.)"/>
-            <text>&gt;</text>
-          </h:span>
-        </h:span>
-      </when>
-      <otherwise>
-        <h:span class="{$lang} element empty">
-          <h:span class="tag empty">
-            <text>&lt;</text>
-            <value-of select="name(.)" />
-            <for-each select="@*">
-              <apply-templates select="." mode="original" />
-            </for-each>
-            <text> /&gt;</text>
-          </h:span>
-        </h:span>
-      </otherwise>
-    </choose>
-  </template>
+  <t:template match="*" mode="original">
+    <t:variable name="lang">
+      <t:call-template name="detect-lang" />
+    </t:variable>
+    <t:choose>
+      <t:when test="node()">
+        <span class="{$lang} element">
+          <span class="tag start">
+            <t:text>&lt;</t:text>
+            <t:call-template name="print-name" />
+            <t:for-each select="@*">
+              <t:apply-templates select="." mode="original" />
+            </t:for-each>
+            <t:text>&gt;</t:text>
+          </span>
+          <t:apply-templates mode="original" />
+          <span class="tag end">
+            <t:text>&lt;/</t:text>
+            <t:value-of select="name(.)"/>
+            <t:text>&gt;</t:text>
+          </span>
+        </span>
+      </t:when>
+      <t:otherwise>
+        <span class="{$lang} element empty">
+          <span class="tag empty">
+            <t:text>&lt;</t:text>
+            <t:call-template name="print-name" />
+            <t:for-each select="@*">
+              <t:apply-templates select="." mode="original" />
+            </t:for-each>
+            <t:text> /&gt;</t:text>
+          </span>
+        </span>
+      </t:otherwise>
+    </t:choose>
+  </t:template>
 
   <!-- Attributes (original) -->
-  <template match="@*" mode="original">
-    <variable name="lang">
-      <call-template name="detect-lang" />
-    </variable>
-    <text> </text>
-    <h:span class="{$lang} attribute">
-      <value-of select="name()" />
-      <text>="</text>
-      <h:span class="attribute-value">
-        <call-template name="parse-attval" />
-      </h:span>
-      <text>"</text>
-    </h:span>
-  </template>
+  <t:template match="@*" mode="original">
+    <t:variable name="lang">
+      <t:call-template name="detect-lang" />
+    </t:variable>
+    <t:text> </t:text>
+    <span class="{$lang} attribute">
+      <t:call-template name="print-name" />
+      <t:text>="</t:text>
+      <span class="attribute-value">
+        <t:call-template name="parse-attval" />
+      </span>
+      <t:text>"</t:text>
+    </span>
+  </t:template>
 
   <!-- Processing Instructions (original) -->
-  <template match="processing-instruction()" mode="original">
-    <h:span class="processing-instruction">
-      <text>&lt;?</text>
-      <value-of select="name(.)" />
-      <text> </text>
-      <value-of select="." />
-      <text>?&gt;</text>
-    </h:span>
-  </template>
+  <t:template match="processing-instruction()" mode="original">
+    <span class="processing-instruction">
+      <t:text>&lt;?</t:text>
+      <t:value-of select="name(.)" />
+      <t:text> </t:text>
+      <t:value-of select="." />
+      <t:text>?&gt;</t:text>
+    </span>
+  </t:template>
 
   <!-- Comments (original) -->
-  <template match="comment()" mode="original">
-    <h:span class="comment">
-      <text>&lt;!--</text>
-      <call-template name="quote">
-        <with-param name="text" select="." />
-      </call-template>
-      <text>--></text>
-    </h:span>
-  </template>
+  <t:template match="comment()" mode="original">
+    <span class="comment">
+      <t:text>&lt;!--</t:text>
+      <t:call-template name="quote">
+        <t:with-param name="text" select="." />
+      </t:call-template>
+      <t:text>--></t:text>
+    </span>
+  </t:template>
 
   <!-- Text (original) -->
-  <template match="text()" mode="original">
-    <h:span class="text">
-      <call-template name="quote">
-        <with-param name="text" select="." />
-      </call-template>
-    </h:span>
-  </template>
+  <t:template match="text()" mode="original">
+    <span class="text">
+      <t:call-template name="quote">
+        <t:with-param name="text" select="." />
+      </t:call-template>
+    </span>
+  </t:template>
 
-</stylesheet>
+</t:stylesheet>

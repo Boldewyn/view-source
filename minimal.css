@@ -1,5 +1,7 @@
 <css>
 * { margin: 0; padding: 0; }
+body { font: 100.01% monospace; }
+pre { font-family: monospace; }
 .element { color: #070; }
 .attribute { color: #700; }
 .text { color: #007; }

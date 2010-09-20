@@ -1,187 +1,211 @@
 <?xml version="1.0" ?>
-<stylesheet version="1.0"
-  xmlns="http://www.w3.org/1999/XSL/Transform"
-  xmlns:h="http://www.w3.org/1999/xhtml">
+<t:stylesheet version="1.0"
+  xmlns:t="http://www.w3.org/1999/XSL/Transform"
+  xmlns="http://www.w3.org/1999/xhtml">
 
-  <variable select="''" name="ns.empty" />
-  <variable select="'http://www.w3.org/XML/1998/namespace'" name="ns.xml" />
-  <variable select="'http://www.w3.org/2000/xmlns/'" name="ns.xmlns" />
-  <variable select="'http://www.w3.org/1999/XSL/Transform'" name="ns.xslt" />
-  <variable select="'http://www.w3.org/1999/xhtml'" name="ns.xhtml" />
-  <variable select="'http://www.w3.org/2000/svg'" name="ns.svg" />
-  <variable select="'http://www.w3.org/1998/Math/MathML'" name="ns.mathml" />
-  <variable select="'http://www.w3.org/2005/SMIL21/Language'" name="ns.smil" />
-  <variable select="'http://www.w3.org/1999/XSL/Format'" name="ns.fo" />
-  <variable select="'http://www.w3.org/1999/xlink'" name="ns.xlink" />
-  <variable select="'http://www.w3.org/2001/XMLSchema'" name="ns.xsd" />
-  <variable select="'http://www.w3.org/2001/XMLSchema-instance'" name="ns.xsd-inst" />
-  <variable select="'http://www.w3.org/2001/xforms'" name="ns.xforms" />
+  <t:variable select="''" name="ns.empty" />
+  <t:variable name="ns" xmlns="">
+    <empty></empty>
+    <xml>http://www.w3.org/XML/1998/namespace</xml>
+    <xmlns>http://www.w3.org/2000/xmlns/</xmlns>
+    <xslt>http://www.w3.org/1999/XSL/Transform</xslt>
+    <xhtml>http://www.w3.org/1999/xhtml</xhtml>
+    <svg>http://www.w3.org/2000/svg</svg>
+    <mathml>http://www.w3.org/1998/Math/MathML</mathml>
+    <smil>http://www.w3.org/2005/SMIL21/Language</smil>
+    <fo>http://www.w3.org/1999/XSL/Format</fo>
+    <xlink>http://www.w3.org/1999/xlink</xlink>
+    <xsd>http://www.w3.org/2001/XMLSchema</xsd>
+    <xsd-inst>http://www.w3.org/2001/XMLSchema-instance</xsd-inst>
+    <xforms>http://www.w3.org/2001/xforms</xforms>
+    <xinclude>http://www.w3.org/2001/XInclude</xinclude>
+    <xul>http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul</xul>
+    <rdf>http://www.w3.org/1999/02/22-rdf-syntax-ns#</rdf>
+  </t:variable>
 
-  <!-- def format-text -->
-  <template name="format-text">
-    <param name="text" select="." />
-    <param name="indent" />
-    <choose>
-      <when test="contains($text, '&#xA;')">
-        <value-of select="normalize-space(substring-before($text, '&#xA;'))" />
-        <text>&#xA;</text>
-        <value-of select="$indent" />
-        <call-template name="format-text">
-          <with-param name="text" select="substring-after($text, '&#xA;')" />
-          <with-param name="indent" select="$indent " />
-        </call-template>
-      </when>
-      <otherwise>
-        <value-of select="normalize-space($text)" />
-      </otherwise>
-    </choose>
-  </template>
+  <!--
+    format text, so that newlines get indented correctly
+  -->
+  <t:template name="format-text">
+    <t:param name="text" select="." />
+    <t:param name="indent" />
+    <t:choose>
+      <t:when test="contains($text, '&#xA;')">
+        <t:value-of select="normalize-space(substring-before($text, '&#xA;'))" />
+        <t:text>&#xA;</t:text>
+        <t:value-of select="$indent" />
+        <t:call-template name="format-text">
+          <t:with-param name="text" select="substring-after($text, '&#xA;')" />
+          <t:with-param name="indent" select="$indent " />
+        </t:call-template>
+      </t:when>
+      <t:otherwise>
+        <t:value-of select="normalize-space($text)" />
+      </t:otherwise>
+    </t:choose>
+  </t:template>
 
-  <!-- def quote -->
-  <template name="quote">
-    <param name="text" />
-    <call-template name="replace">
-      <with-param name="text">
-        <call-template name="replace">
-          <with-param name="text">
-            <call-template name="replace">
-              <with-param name="text">
-                <call-template name="replace">
-                  <with-param name="text">
-                    <call-template name="replace">
-                      <with-param name="text">
-                        <value-of select="$text" />
-                      </with-param>
-                      <with-param name="from" select="'&amp;'" />
-                      <with-param name="to" select="'&amp;amp;'" />
-                    </call-template>
-                  </with-param>
-                  <with-param name="from" select='"&apos;"' />
-                  <with-param name="to" select="'&amp;apos;'" />
-                </call-template>
-              </with-param>
-              <with-param name="from" select="'&quot;'" />
-              <with-param name="to" select="'&amp;quot;'" />
-            </call-template>
-          </with-param>
-          <with-param name="from" select="'&gt;'" />
-          <with-param name="to" select="'&amp;gt;'" />
-        </call-template>
-      </with-param>
-      <with-param name="from" select="'&lt;'" />
-      <with-param name="to" select="'&amp;lt;'" />
-    </call-template>
-  </template>
+  <!--
+    HTML entity quote stuff
+  -->
+  <t:template name="quote">
+    <t:param name="text" />
+    <t:call-template name="replace">
+      <t:with-param name="text">
+        <t:call-template name="replace">
+          <t:with-param name="text">
+            <t:call-template name="replace">
+              <t:with-param name="text">
+                <t:call-template name="replace">
+                  <t:with-param name="text">
+                    <t:call-template name="replace">
+                      <t:with-param name="text">
+                        <t:value-of select="$text" />
+                      </t:with-param>
+                      <t:with-param name="from" select="'&amp;'" />
+                      <t:with-param name="to" select="'&amp;amp;'" />
+                    </t:call-template>
+                  </t:with-param>
+                  <t:with-param name="from" select='"&apos;"' />
+                  <t:with-param name="to" select="'&amp;apos;'" />
+                </t:call-template>
+              </t:with-param>
+              <t:with-param name="from" select="'&quot;'" />
+              <t:with-param name="to" select="'&amp;quot;'" />
+            </t:call-template>
+          </t:with-param>
+          <t:with-param name="from" select="'&gt;'" />
+          <t:with-param name="to" select="'&amp;gt;'" />
+        </t:call-template>
+      </t:with-param>
+      <t:with-param name="from" select="'&lt;'" />
+      <t:with-param name="to" select="'&amp;lt;'" />
+    </t:call-template>
+  </t:template>
 
-  <!-- def replace -->
-  <template name="replace">
-    <param name="text" />
-    <param name="from" />
-    <param name="to" />
-    <choose>
-      <when test="not($from)">
-        <value-of select="$text" />
-      </when>
-      <when test="contains($text, $from)">
-        <value-of select="substring-before($text, $from)" />
-        <value-of select="$to" />
-        <call-template name="replace">
-          <with-param name="text" select="substring-after($text, $from)" />
-          <with-param name="from" select="$from" />
-          <with-param name="to" select="$to" />
-        </call-template>
-      </when>
-      <otherwise>
-        <value-of select="$text" />
-      </otherwise>
-    </choose>
-  </template>
+  <!--
+    replace a string with another
+  -->
+  <t:template name="replace">
+    <t:param name="text" />
+    <t:param name="from" />
+    <t:param name="to" />
+    <t:choose>
+      <t:when test="not($from)">
+        <t:value-of select="$text" />
+      </t:when>
+      <t:when test="contains($text, $from)">
+        <t:value-of select="substring-before($text, $from)" />
+        <t:value-of select="$to" />
+        <t:call-template name="replace">
+          <t:with-param name="text" select="substring-after($text, $from)" />
+          <t:with-param name="from" select="$from" />
+          <t:with-param name="to" select="$to" />
+        </t:call-template>
+      </t:when>
+      <t:otherwise>
+        <t:value-of select="$text" />
+      </t:otherwise>
+    </t:choose>
+  </t:template>
 
-  <!-- def parse_attval -->
-  <template name="parse-attval">
-    <param name="att" select="." />
-    <choose>
-      <when test="(namespace-uri($att/..) = $ns.xml   and ( local-name($att) = 'base' )) or
-                  (namespace-uri($att/..) = $ns.xhtml and ( local-name($att) = 'src' or local-name($att) = 'href' )) or
-                  (namespace-uri($att/..) = $ns.svg   and ( local-name($att) = 'src' )) or
-                  (namespace-uri($att/..) = $ns.xslt  and ( local-name($att) = 'href' )) or
-                  (namespace-uri($att/..) = $ns.smil  and ( local-name($att) = 'src' or local-name($att) = 'href' )) or
-                  (namespace-uri($att) = $ns.xlink and ( local-name($att) = 'href' or local-name($att) = 'role' )) or
-                  contains(substring($att, 1, 7), 'http://') or
-                  contains(substring($att, 1, 8), 'https://') or
-                  contains(substring($att, 1, 7), 'file://') or
-                  contains(substring($att, 1, 7), 'mailto:') or
-                  contains(substring($att, 1, 6), 'ftp://') or
-                  contains(substring($att, 1, 7), 'ftps://') or
-                  contains(substring($att, 1, 5), 'news:') or
-                  contains(substring($att, 1, 4), 'urn:') or
-                  contains(substring($att, 1, 5), 'ldap:') or
-                  contains(substring($att, 1, 5), 'data:')">
-        <h:a>
-          <attribute name="href">
-            <value-of select="$att" />
-          </attribute>
-          <call-template name="quote">
-            <with-param name="text" select="$att" />
-          </call-template>
-        </h:a>
-      </when>
-      <otherwise>
-        <call-template name="quote">
-          <with-param name="text" select="$att" />
-        </call-template>
-      </otherwise>
-    </choose>
-  </template>
+  <!--
+    parse the value of an attribute (find links and make them clickable)
+  -->
+  <t:template name="parse-attval">
+    <t:param name="att" select="." />
+    <t:choose>
+      <t:when test="(namespace-uri($att/..) = document('')//t:variable[@name = 'ns']/xml/text()   and ( local-name($att) = 'base' )) or
+                    (namespace-uri($att/..) = document('')//t:variable[@name = 'ns']/xhtml/text() and ( local-name($att) = 'src' or local-name($att) = 'href' )) or
+                    (namespace-uri($att/..) = document('')//t:variable[@name = 'ns']/svg/text()   and ( local-name($att) = 'src' )) or
+                    (namespace-uri($att/..) = document('')//t:variable[@name = 'ns']/xslt/text()  and ( local-name($att) = 'href' )) or
+                    (namespace-uri($att/..) = document('')//t:variable[@name = 'ns']/smil/text()  and ( local-name($att) = 'src' or local-name($att) = 'href' )) or
+                    (namespace-uri($att)    = document('')//t:variable[@name = 'ns']/xlink/text() and ( local-name($att) = 'href' or local-name($att) = 'role' )) or
+                    contains(substring($att, 1, 7), 'http://') or
+                    contains(substring($att, 1, 8), 'https://') or
+                    contains(substring($att, 1, 7), 'file://') or
+                    contains(substring($att, 1, 7), 'mailto:') or
+                    contains(substring($att, 1, 6), 'ftp://') or
+                    contains(substring($att, 1, 7), 'ftps://') or
+                    contains(substring($att, 1, 5), 'news:') or
+                    contains(substring($att, 1, 4), 'urn:') or
+                    contains(substring($att, 1, 5), 'ldap:') or
+                    contains(substring($att, 1, 5), 'data:')">
+        <a>
+          <t:attribute name="href">
+            <t:value-of select="$att" />
+          </t:attribute>
+          <t:call-template name="quote">
+            <t:with-param name="text" select="$att" />
+          </t:call-template>
+        </a>
+      </t:when>
+      <t:otherwise>
+        <t:call-template name="quote">
+          <t:with-param name="text" select="$att" />
+        </t:call-template>
+      </t:otherwise>
+    </t:choose>
+  </t:template>
 
-  <!-- def detect-lang -->
-  <template name="detect-lang">
-    <param name="node" select="." />
-    <if test="namespace-uri($node) = $highlight-namespace">
-      <text>highlight </text>
-    </if>
-    <choose>
-      <when test="namespace-uri($node) = $ns.empty">
-        <text>empty-ns</text>
-      </when>
-      <when test="namespace-uri($node) = $ns.xml">
-        <text>xml</text>
-      </when>
-      <when test="namespace-uri($node) = $ns.xmlns">
-        <text>xmlns</text>
-      </when>
-      <when test="namespace-uri($node) = $ns.xhtml">
-        <text>xhtml</text>
-      </when>
-      <when test="namespace-uri($node) = $ns.svg">
-        <text>svg</text>
-      </when>
-      <when test="namespace-uri($node) = $ns.xlink">
-        <text>xlink</text>
-      </when>
-      <when test="namespace-uri($node) = $ns.xslt">
-        <text>xslt</text>
-      </when>
-      <when test="namespace-uri($node) = $ns.fo">
-        <text>fo</text>
-      </when>
-      <when test="namespace-uri($node) = $ns.mathml">
-        <text>mathml</text>
-      </when>
-      <when test="namespace-uri($node) = $ns.xsd">
-        <text>xsd</text>
-      </when>
-      <when test="namespace-uri($node) = $ns.xsd-inst">
-        <text>xsd-inst</text>
-      </when>
-      <when test="namespace-uri($node) = $ns.smil">
-        <text>smil</text>
-      </when>
-      <when test="namespace-uri($node) = $ns.xforms">
-        <text>xforms</text>
-      </when>
-      <otherwise />
-    </choose>
-  </template>
+  <!--
+    print the name of a node plus the namespace URI in a title attribute
+  -->
+  <t:template name="print-name">
+    <t:param name="node" select="." />
+    <span class="label">
+      <t:if test="namespace-uri($node) != document('')//t:variable[@name = 'ns']/empty/text()">
+        <t:attribute name="title">
+          <t:value-of select="namespace-uri($node)" />
+        </t:attribute>
+      </t:if>
+      <t:choose>
+        <t:when test="name($node) != local-name($node)">
+          <span class="nsprefix">
+            <t:value-of select="substring-before(name($node), ':')" />
+          </span>
+          <span class="nscolon">
+            <t:text>:</t:text>
+          </span>
+          <span class="local-name">
+            <t:value-of select="local-name($node)" />
+          </span>
+        </t:when>
+        <t:otherwise>
+          <t:value-of select="name($node)" />
+        </t:otherwise>
+      </t:choose>
+    </span>
+  </t:template>
 
-</stylesheet>
+  <!--
+    check the used language against a list of known ones
+  -->
+  <t:template name="detect-lang">
+    <t:param name="node" select="." />
+    <t:if test="namespace-uri($node) = $highlight-namespace">
+      <t:text>highlight </t:text>
+    </t:if>
+    <t:value-of select="local-name(document('')//t:variable[@name = 'ns']/*[text() = namespace-uri($node)])" />
+  </t:template>
+
+  <t:key name="kElemByNSURI"
+       match="*[namespace::*[not(. = ../../namespace::*)]]"
+       use="namespace::*[not(. = ../../namespace::*)]" />
+
+  <!--
+    get a list of all namespaces used in the document
+  -->
+  <t:template name="get-namespace-nodes">
+    <script type="text/javascript">
+      var namespaces = [
+      <t:for-each select="//namespace::*[not(. = ../../namespace::*)]
+                        [count(..|key('kElemByNSURI',.)[1])=1]">
+        <t:value-of select="concat('&quot;',.,'&quot;,')"/>
+      </t:for-each>
+      'DUMMY'
+      ];
+    </script>
+  </t:template>
+
+</t:stylesheet>

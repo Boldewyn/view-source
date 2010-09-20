@@ -1,52 +1,59 @@
 <?xml version="1.0" ?>
 <?xslt-param name="format" select="false()" ?>
 <?xml-stylesheet type="text/xsl" href="view-source.xsl" filename="view-source.xsl" ?>
-<stylesheet version="1.0"
-  xmlns="http://www.w3.org/1999/XSL/Transform"
-  xmlns:h="http://www.w3.org/1999/xhtml">
+<t:stylesheet version="1.0"
+  xmlns:t="http://www.w3.org/1999/XSL/Transform"
+  xmlns="http://www.w3.org/1999/xhtml">
 
-  <param name="base-indent" select="'  '" />
+  <t:param name="base-indent" select="'  '" />
 
-  <param name="format" select="true()" />
+  <t:param name="format" select="true()" />
 
-  <param name="style" select="'minimal'" />
+  <t:param name="style" select="'minimal'" />
 
-  <param name="add-behaviour" select="true()" />
+  <t:param name="add-behaviour" select="true()" />
 
-  <param name="highlight-namespace" select="$ns.empty" />
+  <t:param name="highlight-namespace" select="''" />
 
-  <include href="formatted.xsl" />
+  <t:include href="formatted.xsl" />
 
-  <include href="original.xsl" />
+  <t:include href="original.xsl" />
 
-  <include href="library.xsl" />
+  <t:include href="library.xsl" />
 
-  <template match="/">
-    <h:html>
-      <h:head>
-        <h:title>XML Source</h:title>
-        <h:style type="text/css">
-          <value-of select="document(concat($style, '.css'))/css" />
-        </h:style>
-      </h:head>
-      <h:body>
-        <h:pre id="source">
-          <choose>
-            <when test="$format">
-              <apply-templates mode="formatted" />
-            </when>
-            <otherwise>
-              <apply-templates mode="original" />
-            </otherwise>
-          </choose>
-        </h:pre>
-        <if test="$add-behaviour">
-          <h:script type="text/javascript">
-            <value-of select="document('behaviour.js')/js" />
-          </h:script>
-        </if>
-      </h:body>
-    </h:html>
-  </template>
+  <t:output method="xml" indent="yes"
+            omit-xml-declaration="yes"
+            doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
+            doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+    />
 
-</stylesheet>
+  <t:template match="/">
+    <html>
+      <head>
+        <title>XML Source</title>
+        <style type="text/css">
+          <t:value-of select="document(concat($style, '.css'))/css" />
+        </style>
+      </head>
+      <body>
+        <pre id="source">
+          <t:choose>
+            <t:when test="$format">
+              <t:apply-templates mode="formatted" />
+            </t:when>
+            <t:otherwise>
+              <t:apply-templates mode="original" />
+            </t:otherwise>
+          </t:choose>
+        </pre>
+        <t:if test="$add-behaviour">
+          <t:call-template name="get-namespace-nodes" />
+          <script type="text/javascript">
+            <t:value-of select="document('behaviour.js')/js" />
+          </script>
+        </t:if>
+      </body>
+    </html>
+  </t:template>
+
+</t:stylesheet>
