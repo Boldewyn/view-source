@@ -25,7 +25,7 @@
 
   <t:include href="library.xsl" />
 
-  <t:output method="xml" indent="yes"
+  <t:output method="xml" indent="no"
             omit-xml-declaration="yes"
             doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
             doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
@@ -38,8 +38,11 @@
     <html xml:lang="en">
       <head>
         <title>
-          XML Source
-          <t:if test="$filename">of <t:value-of select="$filename" /></t:if>
+          <t:text>XML Source</t:text>
+          <t:if test="$filename">
+            <t:text> of </t:text>
+            <t:value-of select="$filename" />
+          </t:if>
         </title>
         <meta name="generator" content="view-source {$version}; http://boldewyn.github.com/view-source" />
         <style type="text/css">
