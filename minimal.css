@@ -4,6 +4,8 @@ body { font: 100.01% monospace; }
 pre { font-family: monospace; }
 .element { color: #070; }
 .xhtml .tag { color: #044; }
+.tag .label { font-weight: bold; }
+.attribute .label { font-weight: normal; }
 
 .attribute { color: #700; }
 .text { color: #007; }

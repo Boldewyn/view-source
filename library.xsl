@@ -164,7 +164,7 @@
           <span class="nsprefix">
             <t:value-of select="substring-before(name($node), ':')" />
           </span>
-          <span class="nscolon">
+          <span class="nscolon syntax">
             <t:text>:</t:text>
           </span>
           <span class="local-name">
