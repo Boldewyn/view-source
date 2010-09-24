@@ -4,6 +4,18 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="static/style.css" />
     <title>view-source — An XML Source Formatter in XSLT</title>
+    <style type="text/css">
+.element { color: #070; }
+.xhtml .tag { color: #044; }
+.tag .label { font-weight: bold; }
+.attribute .label { font-weight: normal; }
+
+.attribute { color: #700; }
+.text { color: #007; }
+.attribute-value { color: #404; }
+.comment { color: #333; font-style: italic; }
+.processing-instruction { color: #044; }
+    </style>
   </head>
   <body>
     <div id="content">
@@ -26,6 +38,60 @@
         </p>
       </section>
       <section>
+        <h2>Example</h2>
+        <p>
+          A certain example is easily explained: Take the source of this page
+          and run it through <em>view-source</em>. <a href="example.xhtml">The
+          resulting document</a> is a valid XHTML file.
+        </p>
+        <p>
+          Another example is the <abbr>RSS</abbr> feed of the
+          <a href="http://twitter.com/w3c"><abbr>W3C</abbr> Twitter account</a>
+          (abbridged, read at 24<sup>th</sup> Sep. 2010). The feed, transformed with
+          <em>view-source</em>, looks like this:
+        </p>
+        <pre id="source"><span class="highlight  element"><span class="tag start">&lt;<span class="label">rss</span> <span class="highlight  attribute"><span class="label">version</span>="<span class="attribute-value">2.0</span>"</span>&gt;</span><span class="text">
+  </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">channel</span>&gt;</span><span class="text">
+    </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">title</span>&gt;</span><span class="text">Twitter / w3c</span><span class="tag end">&lt;/title&gt;</span></span><span class="text">
+    </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">link</span>&gt;</span><span class="text">http://twitter.com/w3c</span><span class="tag end">&lt;/link&gt;</span></span><span class="text">
+    </span><span class=" element empty"><span class="tag empty">&lt;<span class="label" title="http://www.w3.org/2005/Atom"><span class="nsprefix">atom</span><span class="nscolon syntax">:</span><span class="local-name">link</span></span> <span class="highlight  attribute"><span class="label">type</span>="<span class="attribute-value">application/rss+xml</span>"</span> <span class="highlight  attribute"><span class="label">href</span>="<span class="attribute-value"><a href="http://twitter.com/statuses/user_timeline/35761106.rss">http://twitter.com/statuses/user_timeline/35761106.rss</a></span>"</span> <span class="highlight  attribute"><span class="label">rel</span>="<span class="attribute-value">self</span>"</span> /&gt;</span></span><span class="text">
+    </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">description</span>&gt;</span><span class="text">Twitter updates from W3C Team / w3c.</span><span class="tag end">&lt;/description&gt;</span></span><span class="text">
+    </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">language</span>&gt;</span><span class="text">en-us</span><span class="tag end">&lt;/language&gt;</span></span><span class="text">
+    </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">ttl</span>&gt;</span><span class="text">40</span><span class="tag end">&lt;/ttl&gt;</span></span><span class="text">
+  </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">item</span>&gt;</span><span class="text">
+    </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">title</span>&gt;</span><span class="text">w3c: RT @scrawford: Tim berners-lee: net neutrality should be an amendment to the constitution - it&amp;apos;s that important #stppICTconf</span><span class="tag end">&lt;/title&gt;</span></span><span class="text">
+    </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">description</span>&gt;</span><span class="text">w3c: RT @scrawford: Tim berners-lee: net neutrality should be an amendment to the constitution - it&amp;apos;s that important #stppICTconf</span><span class="tag end">&lt;/description&gt;</span></span><span class="text">
+    </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">pubDate</span>&gt;</span><span class="text">Fri, 24 Sep 2010 07:31:53 +0000</span><span class="tag end">&lt;/pubDate&gt;</span></span><span class="text">
+    </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">guid</span>&gt;</span><span class="text">http://twitter.com/w3c/statuses/25384071023</span><span class="tag end">&lt;/guid&gt;</span></span><span class="text">
+    </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">link</span>&gt;</span><span class="text">http://twitter.com/w3c/statuses/25384071023</span><span class="tag end">&lt;/link&gt;</span></span><span class="text">
+    </span><span class=" element"><span class="tag start">&lt;<span class="label" title="http://api.twitter.com"><span class="nsprefix">twitter</span><span class="nscolon syntax">:</span><span class="local-name">source</span></span>&gt;</span><span class="text">&amp;lt;a href=&amp;quot;http://identi.ca&amp;quot; rel=&amp;quot;nofollow&amp;quot;&amp;gt;identica&amp;lt;/a&amp;gt;</span><span class="tag end">&lt;/twitter:source&gt;</span></span><span class="text">
+    </span><span class=" element empty"><span class="tag empty">&lt;<span class="label" title="http://api.twitter.com"><span class="nsprefix">twitter</span><span class="nscolon syntax">:</span><span class="local-name">place</span></span> /&gt;</span></span><span class="text">
+  </span><span class="tag end">&lt;/item&gt;</span></span><span class="text">
+  </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">item</span>&gt;</span><span class="text">
+    </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">title</span>&gt;</span><span class="text">w3c: RDFa API Draft Published http://ow.ly/1981zX</span><span class="tag end">&lt;/title&gt;</span></span><span class="text">
+    </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">description</span>&gt;</span><span class="text">w3c: RDFa API Draft Published http://ow.ly/1981zX</span><span class="tag end">&lt;/description&gt;</span></span><span class="text">
+    </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">pubDate</span>&gt;</span><span class="text">Thu, 23 Sep 2010 13:27:06 +0000</span><span class="tag end">&lt;/pubDate&gt;</span></span><span class="text">
+    </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">guid</span>&gt;</span><span class="text">http://twitter.com/w3c/statuses/25306604005</span><span class="tag end">&lt;/guid&gt;</span></span><span class="text">
+    </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">link</span>&gt;</span><span class="text">http://twitter.com/w3c/statuses/25306604005</span><span class="tag end">&lt;/link&gt;</span></span><span class="text">
+    </span><span class=" element"><span class="tag start">&lt;<span class="label" title="http://api.twitter.com"><span class="nsprefix">twitter</span><span class="nscolon syntax">:</span><span class="local-name">source</span></span>&gt;</span><span class="text">&amp;lt;a href=&amp;quot;http://identi.ca&amp;quot; rel=&amp;quot;nofollow&amp;quot;&amp;gt;identica&amp;lt;/a&amp;gt;</span><span class="tag end">&lt;/twitter:source&gt;</span></span><span class="text">
+    </span><span class=" element empty"><span class="tag empty">&lt;<span class="label" title="http://api.twitter.com"><span class="nsprefix">twitter</span><span class="nscolon syntax">:</span><span class="local-name">place</span></span> /&gt;</span></span><span class="text">
+  </span><span class="tag end">&lt;/item&gt;</span></span><span class="text">
+  </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">item</span>&gt;</span><span class="text">
+    </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">title</span>&gt;</span><span class="text">w3c: One Web Day and W3C Community Groups http://ow.ly/197jRE</span><span class="tag end">&lt;/title&gt;</span></span><span class="text">
+    </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">description</span>&gt;</span><span class="text">w3c: One Web Day and W3C Community Groups http://ow.ly/197jRE</span><span class="tag end">&lt;/description&gt;</span></span><span class="text">
+    </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">pubDate</span>&gt;</span><span class="text">Wed, 22 Sep 2010 18:30:08 +0000</span><span class="tag end">&lt;/pubDate&gt;</span></span><span class="text">
+    </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">guid</span>&gt;</span><span class="text">http://twitter.com/w3c/statuses/25235054643</span><span class="tag end">&lt;/guid&gt;</span></span><span class="text">
+    </span><span class="highlight  element"><span class="tag start">&lt;<span class="label">link</span>&gt;</span><span class="text">http://twitter.com/w3c/statuses/25235054643</span><span class="tag end">&lt;/link&gt;</span></span><span class="text">
+    </span><span class=" element"><span class="tag start">&lt;<span class="label" title="http://api.twitter.com"><span class="nsprefix">twitter</span><span class="nscolon syntax">:</span><span class="local-name">source</span></span>&gt;</span><span class="text">&amp;lt;a href=&amp;quot;http://identi.ca&amp;quot; rel=&amp;quot;nofollow&amp;quot;&amp;gt;identica&amp;lt;/a&amp;gt;</span><span class="tag end">&lt;/twitter:source&gt;</span></span><span class="text">
+    </span><span class=" element empty"><span class="tag empty">&lt;<span class="label" title="http://api.twitter.com"><span class="nsprefix">twitter</span><span class="nscolon syntax">:</span><span class="local-name">place</span></span> /&gt;</span></span><span class="text">
+  </span><span class="tag end">&lt;/item&gt;</span></span><span class="text">
+
+  <span class="comment">[...]</span>
+
+  </span><span class="tag end">&lt;/channel&gt;</span></span><span class="text">
+</span><span class="tag end">&lt;/rss&gt;</span></span></pre>
+      </section>
+      <section>
         <h2>Download the Stylesheet</h2>
         <p>
           The project is hosted at <a href="http://github.com/Boldewyn/view-source">GitHub</a>,
@@ -37,6 +103,23 @@
           development version (“master”)</a></li>
           <li>The first <abbr>BETA</abbr> release (<em>not yet published</em>)</li>
         </ul>
+      </section>
+      <section>
+        <h2>Other Projects from me</h2>
+        <p>
+          To remove nodes of a certain namespace from an <abbr>XML</abbr> document, you
+          can use any of the three implementations of
+          <em><a href="http://boldewyn@github.com/rm-ns">rm-ns</a></em>, <abbr>XSLT</abbr>,
+          Javascript or Python. Stripping <abbr>SOAP</abbr> envelopes or remains of Word’s
+          <abbr>HTML</abbr> export, these are the tools to tackle the task.
+        </p>
+        <p>
+          <em><a href="http://boldewyn.github.com/unicodeinfo">Unicodeinfo</a></em> is a set
+          of tools to access the data of the Unicode database. At the moment the collection
+          consists of a toolset to convert the Unicode Dataset to an SQLite database, and a
+          Python module with various useful methods to accompany Python’s own <code>unicodedata</code>
+          library.
+        </p>
       </section>
       <section>
         <h2>Copyright <span class="amp">&amp;</span> License</h2>
@@ -51,7 +134,7 @@
         </p>
       </section>
       <section>
-        <h2>The Official README</h2>
+        <h2>The Official <abbr>README</abbr></h2>
         <pre>
                                 XML Source View
 

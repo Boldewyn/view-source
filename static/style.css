@@ -1,4 +1,6 @@
-@import url(http://fonts.googleapis.com/css?family=IM+Fell+English&subset=latin);
+@charset "UTF-8";
+
+@import url(http://fonts.googleapis.com/css?family=IM+Fell+English:regular,italic&subset=latin);
 @import url(http://fonts.googleapis.com/css?family=IM+Fell+English+SC&subset=latin);
 
 html, body, div, span,
@@ -23,6 +25,7 @@ footer, header, hgroup, menu, nav, section, summary {
 }
 body {
   font: normal 100.01%/1.333 "IM Fell English",Georgia,"Times New Roman",serif;
+  color: #111;
   background: #fdf8f1 url(body.png) repeat;
   margin: 3em 1.333em 1.333em;
 }
@@ -53,6 +56,7 @@ h2 {
 hgroup h2 {
   text-align: center;
   text-indent: 0;
+  letter-spacing: .11em;
 }
 em em,
 h2 em {
@@ -62,6 +66,7 @@ abbr {
   font-family: "IM Fell English SC",Georgia,"Times New Roman",serif;
   text-transform: lowercase;
   font-variant: small-caps;
+  font-style: normal;
 }
 a {
   text-decoration: none;
@@ -85,10 +90,19 @@ pre {
   padding: 1.777em;
   overflow: auto;
 }
+code {
+  color: #333;
+  font: normal 75%/1.777 "DejaVu Sans Mono","Courier New",monospace;
+}
 ul li:before {
   content: "—";
   display: inline-block;
   width: 1.333em;
   color: #777;
   margin-left: -1.333em;
+}
+sup {
+  line-height: 0;
+  vertical-align: super;
+  font-size: x-small;
 }
