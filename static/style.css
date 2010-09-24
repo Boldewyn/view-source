@@ -27,7 +27,7 @@ body {
   font: normal 100.01%/1.333 "IM Fell English",Georgia,"Times New Roman",serif;
   color: #111;
   background: #fdf8f1 url(body.png) repeat;
-  margin: 3em 1.333em 1.333em;
+  padding: 3em 1.333em 1.333em;
 }
 #content {
   max-width: 40em;
