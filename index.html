@@ -8,13 +8,132 @@
   <body>
     <div id="content">
       <hgroup>
-        <h1>view-source</h1>
-        <h2>An XML Source Formatter Written in XSLT</h2>
+        <h1>view-<wbr/>source</h1>
+        <h2>An <abbr>XML</abbr> Source Formatter in <abbr>XSLT</abbr></h2>
       </hgroup>
       <section>
+        <h2>About <em>view-<wbr/>source</em></h2>
         <p>
-        See the <a href="http://github.com/Boldewyn/view-source/raw/master/README">README</a>.
+          The <em>view-source</em> <abbr>XSLT</abbr> stylesheet takes any
+          <abbr>XML</abbr> file as input and renders an <abbr>HTML</abbr> view of its
+          source structure as output.
+          You can choose, if you want to see an indented version that follows
+          the structure of the elements, or a version with the original whitespace
+          preserved.
         </p>
+        <p>
+          See the <a href="http://github.com/Boldewyn/view-source/raw/master/README">README</a>.
+        </p>
+      </section>
+      <section>
+        <h2>Download the Stylesheet</h2>
+        <p>
+          The project is hosted at <a href="http://github.com/Boldewyn/view-source">GitHub</a>,
+          where you can find additional information regarding the stylesheet. From this page,
+          you can directly download the following packages:
+        </p>
+        <ul>
+          <li><a href="http://github.com/Boldewyn/view-source/zipball/master">The current
+          development version (“master”)</a></li>
+          <li>The first <abbr>BETA</abbr> release (<em>not yet published</em>)</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Copyright <span class="amp">&amp;</span> License</h2>
+        <p>
+          Copyright © 2010 Manuel Strehl. All rights reserved.
+        </p>
+        <p>
+          The code is dual licensed under an MIT-style and the Gnu Public License,
+          version 2. You are free to choose any of the two for your project. In
+          most cases, you can just use the stylesheet, as long as the copyright
+          statement stays intact.
+        </p>
+      </section>
+      <section>
+        <h2>The Official README</h2>
+        <pre>
+                                XML Source View
+
+                  Syntax highlighting for XML files with XSLT
+
+
+This stylesheet package contains XSLT styles for syntax highlighting of
+arbitrary XML files.
+
+
+P a r a m e t e r s :
+=====================
+
+* format: controls, whether the output should be pretty-printed or tried to be
+  kept as near as possible to the original source. Default is to apply
+  formatting.
+
+* base-indent: sets the indentation step for each level, if the output should
+  be formatted. The default are two spaces.
+
+* style: The name of a stylesheet (without extension) to be used for display.
+  Note, that the content of the stylesheet, though CSS otherwise, must be
+  encircled by an element &lt;css/&gt; in the empty namespace.
+
+
+H o w   t o   D e p l o y :
+===========================
+
+a) in Firefox: Add the following lines to your XML file:
+
+    &lt;?xslt-param name=&quot;format&quot; select=&quot;true()&quot; ?&gt;
+    &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;view-source.xsl&quot;?&gt;
+
+    (other browsers don't support &lt;?xslt-param ?&gt;, you have to touch
+    view-source.xsl itself there.)
+
+b) via a command line XSLT processor:
+
+    $ saxon -s:source.xml -xsl:view-source.xsl -o:out.xhtml
+
+    $ xalan -IN source.xml -XSL view-source.xsl -OUT out.xhtml
+
+c) inside PHP:
+
+    &lt;?php
+    $xsl = new DOMDocument;
+    $xsl-&gt;load('view-source.xsl');
+    $proc = new XSLTProcessor;
+    $proc-&gt;importStyleSheet($xsl);
+
+    $xml = new DOMDocument;
+    $xml-&gt;load('source.xml');
+    $proc-&gt;setParameter('', 'format', TRUE);
+    $proc-&gt;transformToURI($xml, 'file:///tmp/out.xhtml');
+    ?&gt;
+
+d) in Python with libxml2 and libxslt bindings:
+
+    #! /usr/bin/env python
+
+    import libxml2, libxslt
+
+    styledoc = libxml2.parseFile("view-source.xsl")
+    style = libxslt.parseStylesheetDoc(styledoc)
+    doc = libxml2.parseFile('source.xml')
+    result = style.applyStylesheet(doc, {"format": True})
+
+    out = open('out.xhtml', 'w')
+    out.write(result.serialize())
+
+    style.freeStylesheet()
+    doc.freeDoc()
+    result.freeDoc()
+    out.close()
+
+
+L i c e n s e :
+===============
+
+The stylesheet is published under an MIT-style license and the GPL v2. Choose
+at your liking.
+        </pre>
       </section>
     </div>
   </body>

@@ -1,0 +1,94 @@
+@import url(http://fonts.googleapis.com/css?family=IM+Fell+English&subset=latin);
+@import url(http://fonts.googleapis.com/css?family=IM+Fell+English+SC&subset=latin);
+
+html, body, div, span,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+strong, sub, sup, var,
+dl, dt, dd, ol, ul, li,
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+body {
+  font: normal 100.01%/1.333 "IM Fell English",Georgia,"Times New Roman",serif;
+  background: #fdf8f1 url(body.png) repeat;
+  margin: 3em 1.333em 1.333em;
+}
+#content {
+  max-width: 40em;
+}
+ol, ul {
+  list-style: none;
+}
+p+p {
+  text-indent: 1.333em;
+}
+h1 {
+  font: normal 4em/.666 "IM Fell English SC",Georgia,"Times New Roman",serif;
+  letter-spacing: .2em;
+  margin: 0 0 .666em;
+  text-align: center;
+}
+h2 {
+  font-weight: normal;
+  font-style: italic;
+  font-size: 1.777em;
+  line-height: .75;
+  letter-spacing: .05em;
+  margin: 0 0 .75em;
+  text-indent: .75em;
+}
+hgroup h2 {
+  text-align: center;
+  text-indent: 0;
+}
+em em,
+h2 em {
+  font-style: normal;
+}
+abbr {
+  font-family: "IM Fell English SC",Georgia,"Times New Roman",serif;
+  text-transform: lowercase;
+  font-variant: small-caps;
+}
+a {
+  text-decoration: none;
+  color: #E31F0E;
+}
+a:focus, a:hover {
+  color: #FF3F00;
+  border-bottom: 1px solid;
+}
+section:before {
+  color: #777;
+  content: "¶";
+  display: block;
+  text-align: right;
+  margin: 1.333em 0;
+}
+pre {
+  background: white;
+  color: #333;
+  font: normal 75%/1.777 "DejaVu Sans Mono","Courier New",monospace;
+  padding: 1.777em;
+  overflow: auto;
+}
+ul li:before {
+  content: "—";
+  display: inline-block;
+  width: 1.333em;
+  color: #777;
+  margin-left: -1.333em;
+}
